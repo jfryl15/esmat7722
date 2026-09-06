@@ -22,11 +22,11 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 WORKDIR /build
 COPY pyproject.toml uv.lock ./
 COPY vendor ./vendor
-RUN --mount=type=cache,target=/root/.cache/uv \
+RUN --mount=type=cache,id=s/8078d437-be21-4f8f-99f3-a5bbdc130ce2-/root/cache/uv,target=/root/.cache/uv \
     uv sync --frozen --no-install-project --no-dev
 
 COPY . /build
-RUN --mount=type=cache,target=/root/.cache/uv \
+RUN --mount=type=cache,id=s/8078d437-be21-4f8f-99f3-a5bbdc130ce2-/root/cache/uv,target=/root/.cache/uv \
     uv sync --frozen --no-dev
 
 # Inject the frontend built inside this Docker image.
